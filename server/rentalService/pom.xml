@@ -81,7 +81,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.localoge.housingService.HousingServiceApplication</mainClass>
+							<mainClass>com.localoge.rentalService.RentalServiceApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
