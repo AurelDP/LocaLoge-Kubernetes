@@ -1,10 +1,11 @@
 package com.localoge.housingService.Controller;
 
 import com.localoge.housingService.Model.Housing;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,49 +21,42 @@ public class HousingController {
     @Autowired
     private IHousingService housingService;
 
-    @ApiOperation(value = "Create a housing", response = Housing.class) // Swagger annotation to document this method
-    @ApiParam(name = "housing", value = "Housing object", required = true) // Swagger annotation to document this method
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully created housing"),
-        @ApiResponse(code = 404, message = "Housing not found"),
-        @ApiResponse(code = 409, message = "Housing already exists"),
-        @ApiResponse(code = 500, message = "Internal server error")
-    }) // Swagger annotation to document the possible responses
+    @Operation(summary = "Create a housing", responses = {
+        @ApiResponse(responseCode = "200", description = "Successfully created housing", content = @Content(schema = @Schema(implementation = Housing.class))),
+        @ApiResponse(responseCode = "404", description = "Housing not found"),
+        @ApiResponse(responseCode = "409", description = "Housing already exists"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @PostMapping("/create")
-    public Housing createHousing(@RequestBody Housing housing) throws Exception {
+    public Housing createHousing(@Parameter(description = "Housing object", required = true) @RequestBody Housing housing) throws Exception {
         return housingService.createHousing(housing);
     }
 
-    @ApiOperation(value = "Delete a housing", response = void.class)
-    @ApiParam(name = "id", value = "Housing id", required = true)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully deleted housing"),
-        @ApiResponse(code = 404, message = "Housing not found"),
-        @ApiResponse(code = 409, message = "Housing is rented"),
-        @ApiResponse(code = 500, message = "Internal server error")
+    @Operation(summary = "Delete a housing", responses = {
+            @ApiResponse(responseCode = "200", description = "Successfully deleted housing", content = @Content(schema = @Schema(implementation = void.class))),
+            @ApiResponse(responseCode = "404", description = "Housing not found"),
+            @ApiResponse(responseCode = "409", description = "Housing is rented"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping("/delete")
-    public void deleteHousing(@RequestParam Integer id) throws Exception {
+    public void deleteHousing(@Parameter(description = "Housing id", required = true) @RequestParam Integer id) throws Exception {
         housingService.deleteHousing(id);
     }
 
-    @ApiOperation(value = "Get a housing", response = Housing.class)
-    @ApiParam(name = "id", value = "Housing id", required = true)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully retrieved housing"),
-        @ApiResponse(code = 404, message = "Housing not found"),
-        @ApiResponse(code = 500, message = "Internal server error")
+    @Operation(summary = "Get a housing", responses = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved housing", content = @Content(schema = @Schema(implementation = Housing.class))),
+            @ApiResponse(responseCode = "404", description = "Housing not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping("/get")
-    public Housing getHousing(@RequestParam Integer id) throws Exceptions.HousingNotFoundException {
+    public Housing getHousing(@Parameter(description = "Housing id", required = true) @RequestParam Integer id) throws Exceptions.HousingNotFoundException {
         return housingService.getHousing(id);
     }
 
-    @ApiOperation(value = "Get all housings", response = List.class)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully retrieved all housings"),
-        @ApiResponse(code = 404, message = "No housings found"),
-        @ApiResponse(code = 500, message = "Internal server error")
+    @Operation(summary = "Get all housings", responses = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved all housings", content = @Content(schema = @Schema(implementation = List.class))),
+            @ApiResponse(responseCode = "404", description = "No housings found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
     public List<Housing> getAllHousings() throws Exceptions.HousingNotFoundException {

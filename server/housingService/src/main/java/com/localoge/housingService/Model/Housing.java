@@ -1,12 +1,12 @@
 package com.localoge.housingService.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.Getter;
@@ -21,19 +21,19 @@ public class Housing {
     @Id // JPA annotation to specify the primary key for this object (id)
     @GeneratedValue // JPA annotation to specify that the id is auto-generated
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) // Jackson annotation to specify that this property is read-only
-    @ApiModelProperty(notes = "The database generated housing ID", required = true)
+    @Schema(description = "The database generated housing ID")
     private Integer id;
 
     @NotNull // JPA annotation to specify that this property cannot be null
-    @ApiModelProperty(notes = "The housing type", required = true) // Swagger annotation to describe the property
+    @Schema(description = "The housing type") // Swagger annotation to describe the property
     private String type;
 
     @NotNull
-    @ApiModelProperty(notes = "The housing's location", required = true)
+    @Schema(description = "The housing's location")
     private String location;
 
     @NotNull
-    @ApiModelProperty(notes = "The owner's ID", required = true)
+    @Schema(description = "The owner's ID")
     private Integer ownerId;
 }
 
