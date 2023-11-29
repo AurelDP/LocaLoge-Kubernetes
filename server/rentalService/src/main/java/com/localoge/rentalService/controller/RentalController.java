@@ -3,10 +3,11 @@ package com.localoge.rentalService.controller;
 import com.localoge.rentalService.exceptions.Exceptions;
 import com.localoge.rentalService.model.Rental;
 import com.localoge.rentalService.service.IRentalService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,64 +23,60 @@ public class RentalController {
     // Exceptions are handled by the ExceptionsHandler class
     // When an exception is thrown, the ExceptionsHandler class will handle it and return a response
 
-    @ApiOperation(value = "Create a rental", response = Rental.class) // Swagger annotation to document this method
-    @ApiParam(name = "rental", value = "Rental object", required = true) // Swagger annotation to document this method
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully created rental"),
-        @ApiResponse(code = 404, message = "Property not found"),
-        @ApiResponse(code = 409, message = "Property already exists"),
-        @ApiResponse(code = 500, message = "Internal server error")
+    @Operation(summary = "Create a rental", responses = {
+            @ApiResponse(responseCode = "200", description = "Successfully created rental", content = @Content(schema = @Schema(implementation = Rental.class))),
+            @ApiResponse(responseCode = "404", description = "Property not found"),
+            @ApiResponse(responseCode = "409", description = "Property already exists"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     }) // Swagger annotation to document the possible responses
+
     @PostMapping("/create")
-    public Rental createRental(@RequestBody Rental rental) throws Exception {
+    public Rental createRental(@Parameter(description = "Rental object", required = true) @RequestBody Rental rental) throws Exception {
         return rentalService.createRental(rental);
     }
 
-    @ApiOperation(value = "Delete a rental", response = void.class)
-    @ApiParam(name = "id", value = "Rental id", required = true)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully deleted rental"),
-        @ApiResponse(code = 404, message = "Rental not found"),
-        @ApiResponse(code = 409, message = "Rental is reserved"),
-        @ApiResponse(code = 500, message = "Internal server error")
-    })
+    @Operation(summary = "Delete a rental", responses = {
+            @ApiResponse(responseCode = "200", description = "Successfully deleted rental", content = @Content(schema = @Schema(implementation = void.class))),
+            @ApiResponse(responseCode = "404", description = "Rental not found"),
+            @ApiResponse(responseCode = "409", description = "Rental is reserved"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    }) // Swagger annotation to document the possible responses
+
     @PostMapping("/delete")
-    public void deleteRental(@RequestParam Integer id) throws Exception {
+    public void deleteRental(@Parameter(description = "Rental id", required = true) @RequestParam Integer id) throws Exception {
         rentalService.deleteRental(id);
     }
 
-    @ApiOperation(value = "Get a rental", response = Rental.class)
-    @ApiParam(name = "id", value = "Rental id", required = true)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully retrieved rental"),
-        @ApiResponse(code = 404, message = "Rental not found"),
-        @ApiResponse(code = 500, message = "Internal server error")
-    })
+    @Operation(summary = "Get a rental", responses = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved rental", content = @Content(schema = @Schema(implementation = Rental.class))),
+            @ApiResponse(responseCode = "404", description = "Rental not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    }) // Swagger annotation to document the possible responses
+
     @GetMapping("/get")
-    public Rental getRental(@RequestParam Integer id) throws Exceptions.RentalNotFoundException {
+    public Rental getRental(@Parameter(description = "Rental id", required = true) @RequestParam Integer id) throws Exceptions.RentalNotFoundException {
         return rentalService.getRental(id);
     }
 
-    @ApiOperation(value = "Get all rentals", response = List.class)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully retrieved all rentals"),
-        @ApiResponse(code = 404, message = "No rentals found"),
-        @ApiResponse(code = 500, message = "Internal server error")
-    })
+    @Operation(summary = "Get all rentals", responses = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved all rentals", content = @Content(schema = @Schema(implementation = List.class))),
+            @ApiResponse(responseCode = "404", description = "No rentals found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    }) // Swagger annotation to document the possible responses
+
     @GetMapping
     public List<Rental> getAllRentals() throws Exceptions.RentalNotFoundException {
         return rentalService.getAllRentals();
     }
 
-    @ApiOperation(value = "Get rental by property id", response = Rental.class)
-    @ApiParam(name = "propertyId", value = "Property id", required = true)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Successfully retrieved rental"),
-        @ApiResponse(code = 404, message = "Rental not found"),
-        @ApiResponse(code = 500, message = "Internal server error")
-    })
+    @Operation(summary = "Get rental by property id", responses = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved rental", content = @Content(schema = @Schema(implementation = Rental.class))),
+            @ApiResponse(responseCode = "404", description = "Rental not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    }) // Swagger annotation to document the possible responses
+
     @GetMapping("/housing")
-    public Rental getRentalByPropertyId(@RequestParam Integer propertyId) throws Exceptions.RentalNotFoundException {
+    public Rental getRentalByPropertyId(@Parameter(description = "Property id", required = true) @RequestParam Integer propertyId) throws Exceptions.RentalNotFoundException {
         return rentalService.getRentalByPropertyId(propertyId);
     }
 }
