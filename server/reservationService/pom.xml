@@ -83,7 +83,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.localoge.ReservationService.ReservationServiceApplication</mainClass>
+							<mainClass>com.localoge.reservationService.ReservationServiceApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
