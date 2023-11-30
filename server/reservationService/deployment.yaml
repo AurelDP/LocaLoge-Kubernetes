@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reservation-service-deployment
+  labels:
+    app: reservation-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reservation-service-deployment
+  template:
+    metadata:
+      name: reservation-service-deployment
+      labels:
+        app: reservation-service-deployment
+    spec:
+      containers:
+        - name: reservation-service-deployment
+          image: aureldp/reservation-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+      restartPolicy: Always
+      

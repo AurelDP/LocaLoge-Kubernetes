@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: housing-service-deployment
+  labels:
+    app: housing-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: housing-service-deployment
+  template:
+    metadata:
+      name: housing-service-deployment
+      labels:
+        app: housing-service-deployment
+    spec:
+      containers:
+        - name: housing-service-deployment
+          image: aureldp/housing-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+      
