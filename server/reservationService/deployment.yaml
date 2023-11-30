@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: reservation-service-deployment
-          image: aureldp/reservation-service:latest
+          image: aureldp/reservation-service:0.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082

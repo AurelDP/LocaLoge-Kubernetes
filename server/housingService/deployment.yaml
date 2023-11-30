@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: housing-service-deployment
-          image: aureldp/housing-service:latest
+          image: aureldp/housing-service:0.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
