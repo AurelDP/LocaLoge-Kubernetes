@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="reservationService [run simple spring]" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="reservationService" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.localoge.reservationService.ReservationServiceApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
