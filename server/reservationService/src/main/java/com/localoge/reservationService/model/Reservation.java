@@ -1,11 +1,11 @@
 package com.localoge.reservationService.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -15,23 +15,23 @@ public class Reservation {
     @Id
     @GeneratedValue
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @ApiModelProperty(notes = "The database generated reservation ID", required = true)
+    @Schema(description = "The database generated reservation ID")
     private Integer id;
 
     @NotNull
-    @ApiModelProperty(notes = "The id of the rental that is being reserved", required = true)
+    @Schema(description = "The id of the rental that is being reserved")
     private Integer rentalId;
 
     @NotNull
-    @ApiModelProperty(notes = "The name of the person who made the reservation", required = true)
+    @Schema(description = "The name of the person who made the reservation")
     private String name;
 
     @NotNull
-    @ApiModelProperty(notes="The email of the person who made the reservation", required = true)
+    @Schema(description="The email of the person who made the reservation")
     private String email;
 
     @NotNull
-    @ApiModelProperty(notes="The phone number of the person who made the reservation", required = true)
+    @Schema(description="The phone number of the person who made the reservation")
     private String phone;
 
 }
