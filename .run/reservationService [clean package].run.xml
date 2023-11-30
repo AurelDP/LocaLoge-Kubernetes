@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="housingService [package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+  <configuration default="false" name="reservationService [clean package]" type="MavenRunConfiguration" factoryName="Maven">
     <MavenSettings>
       <option name="myGeneralSettings" />
       <option name="myRunnerSettings" />
@@ -11,6 +11,7 @@
           </option>
           <option name="goals">
             <list>
+              <option value="clean" />
               <option value="package" />
             </list>
           </option>
@@ -22,7 +23,7 @@
             <list />
           </option>
           <option name="resolveToWorkspace" value="false" />
-          <option name="workingDirPath" value="$PROJECT_DIR$/server/housingService" />
+          <option name="workingDirPath" value="$PROJECT_DIR$/server/reservationService" />
         </MavenRunnerParameters>
       </option>
     </MavenSettings>
