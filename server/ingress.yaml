@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: localoge-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: localoge.com
+      http:
+        paths:
+          - path: /housing
+            pathType: Prefix
+            backend:
+              service:
+                name: housing-service
+                port:
+                  number: 8080
+          - path: /rental
+            pathType: Prefix
+            backend:
+              service:
+                name: rental-service
+                port:
+                  number: 8081
+          - path: /reservation
+            pathType: Prefix
+            backend:
+              service:
+                name: reservation-service
+                port:
+                  number: 8082
