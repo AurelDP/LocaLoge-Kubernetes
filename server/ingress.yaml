@@ -1,33 +1,57 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
 metadata:
-  name: localoge-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: localoge-gateway
 spec:
-  ingressClassName: nginx
-  rules:
-    - host: localoge.com
-      http:
-        paths:
-          - path: /housing
-            pathType: Prefix
-            backend:
-              service:
-                name: housing-service
-                port:
-                  number: 8080
-          - path: /rental
-            pathType: Prefix
-            backend:
-              service:
-                name: rental-service
-                port:
-                  number: 8081
-          - path: /reservation
-            pathType: Prefix
-            backend:
-              service:
-                name: reservation-service
-                port:
-                  number: 8082
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: localoge-virtualservice
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - localoge-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /housing
+          rewrite:
+            uri: /
+      route:
+        - destination:
+            host: housing-service.default.svc.cluster.local
+            port:
+             number: 8080
+    - match:
+        - uri:
+            prefix: /rental
+          rewrite:
+            uri: /
+      route:
+        - destination:
+            host: rental-service.default.svc.cluster.local
+            port:
+             number: 8081
+    - match:
+        - uri:
+            prefix: /reservation
+          rewrite:
+            uri: /
+      route:
+        - destination:
+            host: reservation-service.default.svc.cluster.local
+            port:
+             number: 8082
