@@ -28,8 +28,8 @@ spec:
     - match:
         - uri:
             prefix: /housing
-          rewrite:
-            uri: /
+      rewrite:
+        uri: /
       route:
         - destination:
             host: housing-service.default.svc.cluster.local
@@ -38,8 +38,8 @@ spec:
     - match:
         - uri:
             prefix: /rental
-          rewrite:
-            uri: /
+      rewrite:
+        uri: /
       route:
         - destination:
             host: rental-service.default.svc.cluster.local
@@ -48,8 +48,8 @@ spec:
     - match:
         - uri:
             prefix: /reservation
-          rewrite:
-            uri: /
+      rewrite:
+        uri: /
       route:
         - destination:
             host: reservation-service.default.svc.cluster.local

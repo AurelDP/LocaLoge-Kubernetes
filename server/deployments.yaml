@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: housing-service-deployment
-          image: aureldp/housing-service:0.0.1
+          image: aureldp/housing-service:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
         - name: rental-service-deployment
-          image: aureldp/rental-service:0.0.1
+          image: aureldp/rental-service:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
@@ -63,7 +63,7 @@ spec:
     spec:
       containers:
         - name: reservation-service-deployment
-          image: aureldp/reservation-service:0.0.1
+          image: aureldp/reservation-service:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082
