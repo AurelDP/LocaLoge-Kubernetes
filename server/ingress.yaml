@@ -30,28 +30,49 @@ spec:
             prefix: /housing/
       rewrite:
         uri: /
+      headers:
+        request:
+          add:
+            X-Forwarded-Prefix: /housing
+        response:
+          add:
+            X-Forwarded-Prefix: /housing
       route:
         - destination:
             host: housing-service.default.svc.cluster.local
             port:
-             number: 8080
+              number: 8080
     - match:
         - uri:
             prefix: /rental/
       rewrite:
         uri: /
+      headers:
+        request:
+          add:
+            X-Forwarded-Prefix: /rental
+        response:
+          add:
+            X-Forwarded-Prefix: /rental
       route:
         - destination:
             host: rental-service.default.svc.cluster.local
             port:
-             number: 8081
+              number: 8081
     - match:
         - uri:
             prefix: /reservation/
       rewrite:
         uri: /
+      headers:
+        request:
+          add:
+            X-Forwarded-Prefix: /reservation
+        response:
+          add:
+            X-Forwarded-Prefix: /reservation
       route:
         - destination:
             host: reservation-service.default.svc.cluster.local
             port:
-             number: 8082
+              number: 8082
