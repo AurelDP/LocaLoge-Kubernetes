@@ -16,7 +16,7 @@ spec:
       containers:
         - name: housing-service-deployment
           image: aureldp/housing-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
       restartPolicy: Always
@@ -40,7 +40,7 @@ spec:
       containers:
         - name: rental-service-deployment
           image: aureldp/rental-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
       restartPolicy: Always
@@ -64,7 +64,7 @@ spec:
       containers:
         - name: reservation-service-deployment
           image: aureldp/reservation-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8082
       restartPolicy: Always

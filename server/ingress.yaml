@@ -27,7 +27,7 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /housing
+            prefix: /housing/
       rewrite:
         uri: /
       route:
@@ -37,7 +37,7 @@ spec:
              number: 8080
     - match:
         - uri:
-            prefix: /rental
+            prefix: /rental/
       rewrite:
         uri: /
       route:
@@ -47,7 +47,7 @@ spec:
              number: 8081
     - match:
         - uri:
-            prefix: /reservation
+            prefix: /reservation/
       rewrite:
         uri: /
       route:
