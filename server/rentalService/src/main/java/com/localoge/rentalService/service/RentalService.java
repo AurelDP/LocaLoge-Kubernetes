@@ -36,7 +36,7 @@ public class RentalService implements IRentalService {
         }
 
         // Verify if the property exists in the housing service by making a GET request to the housing service
-        String url = housingServiceUrl + "/housings/get?id=" + rental.getPropertyId();
+        String url = housingServiceUrl + "/housings/" + rental.getPropertyId();
         boolean isProperty;
         try {
             ResponseEntity<JsonNode> responseEntity = restTemplate.getForEntity(url, JsonNode.class);
@@ -71,7 +71,7 @@ public class RentalService implements IRentalService {
         }
 
         // Verify if the rental is not reserved by making a GET request to the reservation service
-        String url = reservationServiceUrl + "/reservations/rental?rentalId=" + id;
+        String url = reservationServiceUrl + "/reservations/" + id;
         boolean isReserved;
         try {
             ResponseEntity<JsonNode> responseEntity = restTemplate.getForEntity(url, JsonNode.class);

@@ -43,7 +43,7 @@ public class HousingService implements IHousingService{
         }
 
         // Verify if the housing is not rented by making a GET request to the rental service
-        String url = rentalServiceUrl + "/rentals/housing?propertyId=" + id;
+        String url = rentalServiceUrl + "/rentals/housing/" + id;
         boolean isRented;
         try {
             ResponseEntity<JsonNode> responseEntity = restTemplate.getForEntity(url, JsonNode.class);

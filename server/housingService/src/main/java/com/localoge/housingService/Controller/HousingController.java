@@ -27,7 +27,7 @@ public class HousingController {
         @ApiResponse(responseCode = "409", description = "Housing already exists"),
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @PostMapping("/create")
+    @PostMapping
     public Housing createHousing(@Parameter(description = "Housing object", required = true) @RequestBody Housing housing) throws Exception {
         return housingService.createHousing(housing);
     }
@@ -38,8 +38,8 @@ public class HousingController {
             @ApiResponse(responseCode = "409", description = "Housing is rented"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @PostMapping("/delete")
-    public void deleteHousing(@Parameter(description = "Housing id", required = true) @RequestParam Integer id) throws Exception {
+    @DeleteMapping("/{id}")
+    public void deleteHousing(@PathVariable Integer id) throws Exception {
         housingService.deleteHousing(id);
     }
 
@@ -48,8 +48,8 @@ public class HousingController {
             @ApiResponse(responseCode = "404", description = "Housing not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @GetMapping("/get")
-    public Housing getHousing(@Parameter(description = "Housing id", required = true) @RequestParam Integer id) throws Exceptions.HousingNotFoundException {
+    @GetMapping("/{id}")
+    public Housing getHousing(@PathVariable Integer id) throws Exceptions.HousingNotFoundException {
         return housingService.getHousing(id);
     }
 

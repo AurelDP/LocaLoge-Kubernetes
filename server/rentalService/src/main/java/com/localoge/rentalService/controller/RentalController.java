@@ -29,8 +29,7 @@ public class RentalController {
             @ApiResponse(responseCode = "409", description = "Property already exists"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     }) // Swagger annotation to document the possible responses
-
-    @PostMapping("/create")
+    @PostMapping
     public Rental createRental(@Parameter(description = "Rental object", required = true) @RequestBody Rental rental) throws Exception {
         return rentalService.createRental(rental);
     }
@@ -41,9 +40,8 @@ public class RentalController {
             @ApiResponse(responseCode = "409", description = "Rental is reserved"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     }) // Swagger annotation to document the possible responses
-
-    @PostMapping("/delete")
-    public void deleteRental(@Parameter(description = "Rental id", required = true) @RequestParam Integer id) throws Exception {
+    @DeleteMapping("/{id}")
+    public void deleteRental(@PathVariable Integer id) throws Exception {
         rentalService.deleteRental(id);
     }
 
@@ -52,9 +50,8 @@ public class RentalController {
             @ApiResponse(responseCode = "404", description = "Rental not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     }) // Swagger annotation to document the possible responses
-
-    @GetMapping("/get")
-    public Rental getRental(@Parameter(description = "Rental id", required = true) @RequestParam Integer id) throws Exceptions.RentalNotFoundException {
+    @GetMapping("/{id}")
+    public Rental getRental(@PathVariable Integer id) throws Exceptions.RentalNotFoundException {
         return rentalService.getRental(id);
     }
 
@@ -63,7 +60,6 @@ public class RentalController {
             @ApiResponse(responseCode = "404", description = "No rentals found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     }) // Swagger annotation to document the possible responses
-
     @GetMapping
     public List<Rental> getAllRentals() throws Exceptions.RentalNotFoundException {
         return rentalService.getAllRentals();
@@ -74,9 +70,8 @@ public class RentalController {
             @ApiResponse(responseCode = "404", description = "Rental not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     }) // Swagger annotation to document the possible responses
-
-    @GetMapping("/housing")
-    public Rental getRentalByPropertyId(@Parameter(description = "Property id", required = true) @RequestParam Integer propertyId) throws Exceptions.RentalNotFoundException {
+    @GetMapping("/housing/{propertyId}")
+    public Rental getRentalByPropertyId(@PathVariable Integer propertyId) throws Exceptions.RentalNotFoundException {
         return rentalService.getRentalByPropertyId(propertyId);
     }
 }

@@ -27,8 +27,7 @@ public class ReservationController {
             @ApiResponse(responseCode = "409", description = "Reservation already exists"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-
-    @PostMapping("/create")
+    @PostMapping
     public Reservation createReservation(@Parameter(description = "The reservation to create", required = true) @RequestBody Reservation reservation) throws Exception {
         return reservationService.createReservation(reservation);
     }
@@ -38,9 +37,8 @@ public class ReservationController {
             @ApiResponse(responseCode = "404", description = "Reservation not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-
-    @PostMapping("/delete")
-    public void deleteReservation(@Parameter(description = "Reservation id", required = true) @RequestParam Integer id) throws Exceptions.ReservationNotFoundException {
+    @DeleteMapping("/{id}")
+    public void deleteReservation(@PathVariable Integer id) throws Exceptions.ReservationNotFoundException {
         reservationService.deleteReservation(id);
     }
 
@@ -49,9 +47,8 @@ public class ReservationController {
             @ApiResponse(responseCode = "404", description = "Reservation not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-
-    @GetMapping("/get")
-    public Reservation getReservation(@Parameter(description = "Reservation id", required = true) @RequestParam Integer id) throws Exceptions.ReservationNotFoundException {
+    @GetMapping("/{id}")
+    public Reservation getReservation(@PathVariable Integer id) throws Exceptions.ReservationNotFoundException {
         return reservationService.getReservation(id);
     }
 
@@ -60,9 +57,8 @@ public class ReservationController {
             @ApiResponse(responseCode = "404", description = "Reservation not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-
-    @GetMapping("/rental")
-    public Reservation getReservationByRentalId(@Parameter(description = "Rental id", required = true) @RequestParam Integer rentalId) throws Exceptions.ReservationNotFoundException {
+    @GetMapping("/rental/{rentalId}")
+    public Reservation getReservationByRentalId(@PathVariable Integer rentalId) throws Exceptions.ReservationNotFoundException {
         return reservationService.getReservationByRentalId(rentalId);
     }
 
@@ -71,8 +67,7 @@ public class ReservationController {
             @ApiResponse(responseCode = "404", description = "No reservations found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-
-    @GetMapping("/getall")
+    @GetMapping
     public List<Reservation> getReservations() throws Exceptions.ReservationNotFoundException {
         return reservationService.getReservations();
     }

@@ -30,7 +30,7 @@ public class ReservationService implements IReservationService{
         if(reservation.getName() == null || reservation.getEmail() == null || reservation.getPhone() == null)
             throw new IllegalArgumentException("All fields must be filled");
 
-        String url = rentalServiceUrl + "/rentals/get?id=" + reservation.getRentalId();
+        String url = rentalServiceUrl + "/rentals/" + reservation.getRentalId();
         boolean isRental;
         try {
             ResponseEntity<JsonNode> responseEntity = restTemplate.getForEntity(url, JsonNode.class);
