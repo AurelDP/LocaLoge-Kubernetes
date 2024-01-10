@@ -68,3 +68,27 @@ spec:
           ports:
             - containerPort: 8082
       restartPolicy: Always
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-service-deployment
+  template:
+    metadata:
+      name: database-service-deployment
+      labels:
+        app: database-service-deployment
+    spec:
+      containers:
+        - name: database-service-deployment
+          image: aureldp/database-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3306
+      restartPolicy: Always
