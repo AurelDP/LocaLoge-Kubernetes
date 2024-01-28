@@ -14,7 +14,7 @@ import lombok.Data;
 public class Rental {
 
     @Id // JPA annotation to specify the primary key for this object (id)
-    @GeneratedValue // JPA annotation to specify that the id is auto-generated
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // JPA annotation to specify that the id is auto-generated
     @JsonProperty(access = JsonProperty.Access.READ_ONLY) // Jackson annotation to specify that this property is read-only
     @Schema(description = "The database generated rental ID")
     private Integer id;

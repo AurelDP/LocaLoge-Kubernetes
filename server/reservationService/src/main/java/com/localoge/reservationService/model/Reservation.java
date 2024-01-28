@@ -9,11 +9,11 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Data
-@Table(name = "reservation")
+@Table(name = "reservations")
 public class Reservation {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(description = "The database generated reservation ID")
     private Integer id;
