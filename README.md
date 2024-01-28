@@ -19,20 +19,21 @@ Network gateway management is carried out using the **Istio** service mesh.
 
 ## How to run the project
 1. Launch **Docker**
-2. Launch **Minikube** and open the tunnel
+2. Launch **Minikube**
 ```
 > minikube start
-> minikube tunnel
 ```
 3. Apply the **Kubernetes** files that you can find in the [server](https://github.com/AurelDP/LocaLoge-Kubernetes/tree/main/server) folder
 ```
-> cd server
-> kubectl apply -f services.yaml
-> kubectl apply -f deployments.yaml
-> kubectl apply -f ingress.yaml
+> cd server/kubernetes
+> ./kubectlApply.sh
 ```
 4. Wait for the pods to be ready
-5. Run the website interface
+5. Run the tunnel
+```
+> minikube tunnel
+```
+7. Run the website interface
 ```
 > cd client
 > npm install
